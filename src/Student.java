@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Student extends User {
+public class Student extends User implements Serializable{
 
     private ArrayList<Score> scores = new ArrayList<>();
 

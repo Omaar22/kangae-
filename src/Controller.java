@@ -1,6 +1,10 @@
+import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Controller {
+public class Controller implements Serializable{
+
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Game> games = new ArrayList<>();
     private static User loggedInUser = null;
@@ -54,5 +58,15 @@ public class Controller {
     }
     public static ArrayList<User> getUsers() {
         return users;
+    }
+    public static void start () throws IOException, ClassNotFoundException {
+        Database database = new Database();
+        games = database.readSerializerGames("games.ser");
+        users = database.readSerializerUsers("users.ser");
+    }
+    public static void finish () throws IOException {
+        Database database = new Database();
+        database.writeSerializeGames(games, "games.ser");
+        database.writeSerializeUsers(users, "users.ser");
     }
 }

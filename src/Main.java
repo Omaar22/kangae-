@@ -1,13 +1,15 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Scanner input = new Scanner(System.in);
         int choice;
+        Controller.start();
 
         while (true) {
 
@@ -31,6 +33,7 @@ public class Main {
                 //delete game?
             }
             System.out.println("5.log out");
+            System.out.println("6.EXIT");
             choice = input.nextInt();
             input.nextLine();
 
@@ -55,9 +58,11 @@ public class Main {
                 }
             } else if (choice == 4) createGame();
             else if (choice == 5) logOut();
+            else if (choice == 6) break;
 
         }
 
+        Controller.finish();
 
     }
 

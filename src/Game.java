@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable{
     private int id, difficultyRank, numberOfRates;
     private String name, description, instructions, category;
     private float averageRate;
