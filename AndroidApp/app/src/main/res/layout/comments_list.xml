@@ -4,23 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gameName"
-        android:textSize="20sp" />
+        android:id="@+id/userName"
+        android:textSize="25sp"
+        android:text="user name " />
 
     <TextView
-        android:text="TextView"
+        android:text="comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/category"
-        android:textSize="20sp" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rating"
+        android:id="@+id/comment"
         android:textSize="20sp" />
 </LinearLayout>
