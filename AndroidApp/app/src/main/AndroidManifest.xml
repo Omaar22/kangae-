@@ -28,7 +28,8 @@
             android:name=".viewGames"
             android:label="@string/title_activity_view_games"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GameInfo"></activity>
+        <activity android:name=".GameInfo" />
+        <activity android:name=".playGameActivity"></activity>
     </application>
 
 </manifest>

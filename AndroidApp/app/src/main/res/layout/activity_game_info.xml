@@ -78,7 +78,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
-        android:id="@+id/playGame" />
+        android:id="@+id/playGame"
+        android:onClick="onClickPlayGame (GameInfo)" />
 
     <ListView
         android:layout_width="match_parent"
