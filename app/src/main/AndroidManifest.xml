@@ -22,8 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity
+            android:name=".viewGames"
+            android:label="@string/title_activity_view_games"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GameInfo"></activity>
     </application>
 
 </manifest>
