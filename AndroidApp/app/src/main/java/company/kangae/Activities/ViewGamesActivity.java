@@ -1,24 +1,32 @@
-package company.kangae;
+package company.kangae.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import company.kangae.Controller;
+import company.kangae.Game;
+import company.kangae.R;
 
 public class ViewGamesActivity extends AppCompatActivity {
 
@@ -26,10 +34,9 @@ public class ViewGamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_games);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addGameButton);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,8 +46,25 @@ public class ViewGamesActivity extends AppCompatActivity {
             }
         });
 
-        viewGame();
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString("accountType");
+        if("Student".equals(message)){
+            fab.hide();
+        }
+        Button logOut = (Button) findViewById(R.id.log_out);
+        logOut.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Controller.resetLoggedInUser();
+                        Intent myIntent = new Intent(ViewGamesActivity.this, MainActivity.class);
+                        ViewGamesActivity.this.startActivity(myIntent);
+                        finish();
+                    }
+                }
+        );
 
+        viewGame();
     }
 
     public void viewGame(){
@@ -49,16 +73,19 @@ public class ViewGamesActivity extends AppCompatActivity {
         final ArrayList <Game> games = Controller.getGames();
 
         if (games.size() == 0){
-            RelativeLayout layout = new RelativeLayout(this);
+            CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
             TextView noAvailableGames = new TextView(this);
             noAvailableGames.setText("No available games now, stay tuned!");
-            noAvailableGames.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            noAvailableGames.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+            noAvailableGames.setTextColor(Color.RED);
+            noAvailableGames.setGravity(Gravity.CENTER_HORIZONTAL);
             RelativeLayout.LayoutParams details = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT
             );
-            details.setMargins(10, 10, 10, 10);
-            layout.addView(noAvailableGames, details);
+            details.setMargins(30, 30, 30, 30);
+            noAvailableGames.setLayoutParams(details);
+            layout.addView(noAvailableGames);
             return;
         }
 

@@ -1,7 +1,10 @@
-package company.kangae;
+package company.kangae.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import company.kangae.Game;
+import company.kangae.R;
 
 public class PlayGameActivity extends AppCompatActivity {
 

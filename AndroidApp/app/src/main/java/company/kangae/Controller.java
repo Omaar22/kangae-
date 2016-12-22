@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Controller implements Serializable{
 
     private static ArrayList<User> users = new ArrayList<>();
@@ -22,7 +23,7 @@ public class Controller implements Serializable{
         return 2;
     }
 
-    static int signUp(String firstName, String lastName, String userName, String password, String email, String gender,
+    public static int signUp(String firstName, String lastName, String userName, String password, String email, String gender,
                    String biography, String birthDate, boolean isTeacher) {
         User newUser;
         if (isTeacher) {
@@ -35,11 +36,11 @@ public class Controller implements Serializable{
             return validationAnswer;
         }
         users.add(newUser);
-        loggedInUser = newUser;
+        signIn(email, password);
         return 2;
     }
 
-    static boolean signIn(String userNameOrEmail, String password) {
+    public static boolean signIn(String userNameOrEmail, String password) {
         for (User u : users) {
             if ((u.getEmail().equals(userNameOrEmail) || u.getUserName().equals(userNameOrEmail)) && u.getPassword().equals(password)) {
                 loggedInUser = u;
@@ -47,11 +48,12 @@ public class Controller implements Serializable{
             }
         }
         return false;
+
     }
     public static User getLoggedInUser() {
         return loggedInUser;
     }
-    public static void setLoggedInUser (){
+    public static void resetLoggedInUser(){
         loggedInUser = null;
     }
     public static ArrayList<Game> getGames() {
