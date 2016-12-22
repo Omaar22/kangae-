@@ -56,8 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                     userName.setError(getString(R.string.error_exist_username));
                     userName.requestFocus();
                 } else {
-                    // TODO: 21/12/2016  redirect
-                    Intent myIntent = new Intent(SignUpActivity.this, MainActivity.class);
+                    Intent myIntent = new Intent(SignUpActivity.this, ViewGamesActivity.class);
                     SignUpActivity.this.startActivity(myIntent);
                     finish();
                 }

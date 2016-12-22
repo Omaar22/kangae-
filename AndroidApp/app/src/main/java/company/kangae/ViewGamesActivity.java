@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class viewGamesActivity extends AppCompatActivity {
+public class ViewGamesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

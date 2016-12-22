@@ -34,7 +34,6 @@ public class GameInfoActivity extends AppCompatActivity {
         TextView rating = (TextView) findViewById(R.id.rating);
         TextView difficultyRank = (TextView) findViewById(R.id.difficultyrank);
         ListView commentsList = (ListView) findViewById(R.id.comments);
-        Button playGame = (Button) findViewById(R.id.playGame);
 
         assert name != null;
         name.setText(game.getName());
@@ -59,11 +58,9 @@ public class GameInfoActivity extends AppCompatActivity {
     }
 
     public void onClickPlayGame (View view){
-        //                                         Intent myIntent = new Intent(MainActivity.this, SignUpActivity.class);
         Intent intent = new Intent(this, playGameActivity.class);
-        intent.putExtra("game", ;
+        intent.putExtra("game", game);
         startActivity(intent);
-
     }
 
     class commentAdapter extends ArrayAdapter<Comment> {

@@ -73,7 +73,6 @@ public class Game implements Serializable{
     public String viewGame (){
         String ret = (name + "\n" + description + "\n" + instructions + "\n" + category +"\n" + "difficulty rank: " + difficultyRank +
                 "\nRate: " + getRate());
-        //TODO: view comments and replies
         return ret;
 
     }
