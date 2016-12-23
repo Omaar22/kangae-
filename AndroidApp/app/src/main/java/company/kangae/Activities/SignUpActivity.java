@@ -1,6 +1,7 @@
-package company.kangae;
+package company.kangae.Activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import company.kangae.Controller;
+import company.kangae.R;
+import company.kangae.Student;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -45,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean type = accountType.getSelectedItem().toString().equals("Student Account");
+                boolean type = accountType.getSelectedItem().toString().equals("Teacher Account");
                 int validationAnswer = Controller.signUp(firstName.getText().toString(), lastName.getText().toString(), userName.getText().toString(),
                         password.getText().toString(), email.getText().toString(), gender.getSelectedItem().toString(),
                         biography.getText().toString(), birthDate.getText().toString(), type);
@@ -56,8 +61,14 @@ public class SignUpActivity extends AppCompatActivity {
                     userName.setError(getString(R.string.error_exist_username));
                     userName.requestFocus();
                 } else {
+
                     Intent myIntent = new Intent(SignUpActivity.this, ViewGamesActivity.class);
-                    SignUpActivity.this.startActivity(myIntent);
+                    if (Controller.getLoggedInUser() instanceof Student) {
+                        myIntent.putExtra("accountType", "Student");
+                    }else{
+                        myIntent.putExtra("accountType", "Teacher");
+                    }
+                    startActivity(myIntent);
                     finish();
                 }
             }

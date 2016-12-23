@@ -126,7 +126,7 @@ public class Main {
     }
 
     public static void logOut() {
-        Controller.setLoggedInUser();
+        Controller.resetLoggedInUser();
     }
 
     public static void createGame() {

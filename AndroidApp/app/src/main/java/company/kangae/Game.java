@@ -91,7 +91,7 @@ public class Game implements Serializable{
         averageRate = 0;
     }
 
-    String getRate(){
+    public String getRate(){
         if(averageRate < 1.5){
             return "Boring";
         }else if(averageRate < 2.5){
