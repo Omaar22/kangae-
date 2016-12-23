@@ -58,7 +58,7 @@ public class GameInfoActivity extends AppCompatActivity {
     }
 
     public void onClickPlayGame (View view){
-        Intent intent = new Intent(this, playGameActivity.class);
+        Intent intent = new Intent(this, PlayGameActivity.class);
         intent.putExtra("game", game);
         startActivity(intent);
     }
