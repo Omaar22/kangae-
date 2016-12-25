@@ -18,6 +18,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,6 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.GameInfoActivity" />
         <activity android:name=".Activities.PlayGameActivity" />
+        <activity android:name=".Activities.CreateGameActivity"></activity>
     </application>
 
 </manifest>

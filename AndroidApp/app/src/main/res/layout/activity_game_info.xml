@@ -69,25 +69,35 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="Play Game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:id="@+id/playGame"
-        android:onClick="onClickPlayGame (GameInfo)" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/comments"
+        android:layout_marginTop="22dp"
         android:layout_below="@+id/difficultyrank"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Play Game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="65dp"
+        android:layout_marginEnd="65dp"
+        android:id="@+id/playGame"
+        android:onClick="onClickPlayGame (GameInfo)"
+        android:layout_alignBaseline="@+id/category"
+        android:layout_alignBottom="@+id/category"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score"
+        android:textSize="24sp"
+        android:layout_alignLeft="@+id/playGame"
+        android:layout_alignStart="@+id/playGame"
+        android:layout_below="@+id/playGame" />
 
 </RelativeLayout>

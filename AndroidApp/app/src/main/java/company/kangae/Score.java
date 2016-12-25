@@ -17,7 +17,7 @@ public class Score implements Serializable{
         return score;
     }
 
-    Score (int gameId, int score){
+    public Score(int gameId, int score){
         this.gameId = gameId;
         this.score = score;
     }

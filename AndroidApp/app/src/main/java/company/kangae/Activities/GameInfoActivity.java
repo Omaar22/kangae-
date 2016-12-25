@@ -15,8 +15,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import company.kangae.Comment;
+import company.kangae.Controller;
 import company.kangae.Game;
 import company.kangae.R;
+import company.kangae.Score;
+import company.kangae.Student;
 
 public class GameInfoActivity extends AppCompatActivity {
 
@@ -35,7 +38,9 @@ public class GameInfoActivity extends AppCompatActivity {
         TextView instructions = (TextView) findViewById(R.id.instructions);
         TextView rating = (TextView) findViewById(R.id.rating);
         TextView difficultyRank = (TextView) findViewById(R.id.difficultyrank);
+        TextView score = (TextView) findViewById(R.id.score);
         ListView commentsList = (ListView) findViewById(R.id.comments);
+
 
         assert name != null;
         name.setText(game.getName());
@@ -50,6 +55,19 @@ public class GameInfoActivity extends AppCompatActivity {
         assert difficultyRank != null;
         difficultyRank.setText(Integer.toString(game.getDifficultyRank()));
         ArrayList <Comment> comments = game.getComments();
+
+        if (Controller.getLoggedInUser() instanceof Student){
+            Student student = (Student) Controller.getLoggedInUser();
+            ArrayList <Score> scores = student.getScores();
+            boolean found = false;
+            for (int i = 0; i < scores.size(); i++){
+                if (scores.get(i).getGameId() == game.getId()){
+                    found = true;
+                    score.setText("Score: " + Integer.toString(scores.get(i).getScore()));
+                }
+            }
+            if (!found) score.setText("Score: 0");
+        }
 
         ArrayAdapter arrayAdapter = new GameInfoActivity.commentAdapter(this, comments);
         assert commentsList != null;

@@ -94,7 +94,8 @@ public class ViewGamesActivity extends AppCompatActivity {
 
         final Context context = this;
 
-        gameList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gameList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
