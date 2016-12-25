@@ -1,10 +1,8 @@
 package company.kangae.Activities;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -46,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
                 email = (EditText) findViewById(R.id.email), biography = (EditText) findViewById(R.id.biography),
                 birthDate = (EditText) findViewById(R.id.birthDate);
 
-        Button signUpButton = (Button) findViewById(R.id.submit);
+        Button signUpButton = (Button) findViewById(R.id.submitSignUp);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
