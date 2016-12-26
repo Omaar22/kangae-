@@ -16,10 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/createGameLayout"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/abc_action_bar_content_inset_material"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -71,10 +71,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="match_parent"
+            android:layout_width="111dp"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/stat_notify_more"
-            android:id="@+id/addQuestionButton"/>
+            android:id="@+id/addQuestionButton"
+            app:elevation="6dp"
+            android:baselineAlignBottom="true"
+            android:layout_gravity="right" />
 
         <Button
             android:id="@+id/submitCreateGame"

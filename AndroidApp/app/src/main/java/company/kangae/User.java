@@ -16,6 +16,9 @@ public class User implements Serializable{
         this.birthDate = birthDate;
     }
 
+    public User() {
+    }
+
     public String viewProfile() {
         return (firstName + "\n" + lastName + "\n" + userName + "\n" + email + "\n" + gender + "\n" + biography + "\n" + birthDate);
     }

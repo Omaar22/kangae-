@@ -303,7 +303,7 @@ public class Main {
             String comment;
             System.out.println("Enter comment");
             comment = input.nextLine();
-            Comment c = new Comment();
+            Comment c = new Comment (comment, Controller.getLoggedInUser().getUserName());
             c.setComment(comment);
             c.setUserName(Controller.getLoggedInUser().getUserName());
             comments.add(c);

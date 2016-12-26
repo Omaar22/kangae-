@@ -1,14 +1,40 @@
 package company.kangae;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game implements Serializable{
+public class Game implements Parcelable{
     private int id, difficultyRank, numberOfRates;
     private String name, description, instructions, category;
     private float averageRate;
     private ArrayList<Question> questions = new ArrayList<>();
     private ArrayList<Comment> comments = new ArrayList<>();
+
+    protected Game(Parcel in) {
+        id = in.readInt();
+        difficultyRank = in.readInt();
+        numberOfRates = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        instructions = in.readString();
+        category = in.readString();
+        averageRate = in.readFloat();
+    }
+
+    public static final Creator<Game> CREATOR = new Creator<Game>() {
+        @Override
+        public Game createFromParcel(Parcel in) {
+            return new Game(in);
+        }
+
+        @Override
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -111,6 +137,23 @@ public class Game implements Serializable{
     }
     void addQuestion(Question question){
         questions.add(question);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeInt(difficultyRank);
+        parcel.writeInt(numberOfRates);
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(instructions);
+        parcel.writeString(category);
+        parcel.writeFloat(averageRate);
     }
 }
 

@@ -99,7 +99,6 @@ public class ViewGamesActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 Intent intent = new Intent(context, GameInfoActivity.class);
                 intent.putExtra("game", games.get(i));
                 startActivity(intent);
@@ -128,6 +127,8 @@ public class ViewGamesActivity extends AppCompatActivity {
 
 
             Game newGame = getItem(position);
+            Log.i("game name in view" , newGame.getName());
+
             assert newGame != null;
             gameName.setText(newGame.getName());
             category.setText(newGame.getCategory());
