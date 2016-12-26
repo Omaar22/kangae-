@@ -69,7 +69,7 @@ public class CreateGameActivity extends AppCompatActivity {
                 layout.addView(textInputLayout, layout.getChildCount() - 2);
 
 
-                //sa7 kda? *sigh* 
+                //sa7 kda? *sigh*
                 String newQuestion = question.getText().toString();
                 String newAnswer = answer.getText().toString();
                 Question q = new Question(newQuestion, newAnswer, false);
