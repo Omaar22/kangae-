@@ -37,22 +37,8 @@ public class CreateGameActivity extends AppCompatActivity {
         final FloatingActionButton addQuestion = (FloatingActionButton) findViewById(R.id.addQuestionButton);
         final Button submitGame = (Button) findViewById(R.id.submitCreateGame);
 
-        EditText gameName = (EditText) findViewById(R.id.gameName);
-        EditText gameDescription = (EditText) findViewById(R.id.gameDescription);
-        EditText gameInstructions = (EditText) findViewById(R.id.gameInstructions);
-        EditText gameCategory = (EditText) findViewById(R.id.gameCategory);
-
-        final String name = gameName.getText().toString();
-        final String description = gameDescription.getText().toString();
-        final String instructions = gameInstructions.getText().toString();
-        final String category = gameCategory.getText().toString();
-
-        Log.i("game name", name);
-
-
-        final ArrayList <Question> questions = new ArrayList<>();
-        final int gameId = Controller.getGames().size() + 1;
-
+        final ArrayList<EditText> questionEditText = new ArrayList<>();
+        final ArrayList<EditText> answerEditText = new ArrayList<>();
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +53,9 @@ public class CreateGameActivity extends AppCompatActivity {
                 textInputLayout = new TextInputLayout(CreateGameActivity.this);
                 textInputLayout.addView(answer);
                 layout.addView(textInputLayout, layout.getChildCount() - 2);
+                questionEditText.add(question);
+                answerEditText.add(answer);
 
-
-                //sa7 kda? *sigh* 
-                String newQuestion = question.getText().toString();
-                String newAnswer = answer.getText().toString();
-                Question q = new Question(newQuestion, newAnswer, false);
-                questions.add(q);
 
                 /*TODO:scroll when adding
                   TODO: moving addquestion button with the new question answer using addRule and answerID
@@ -87,8 +69,27 @@ public class CreateGameActivity extends AppCompatActivity {
         submitGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText gameName = (EditText) findViewById(R.id.gameName);
+                EditText gameDescription = (EditText) findViewById(R.id.gameDescription);
+                EditText gameInstructions = (EditText) findViewById(R.id.gameInstructions);
+                EditText gameCategory = (EditText) findViewById(R.id.gameCategory);
+
+                final String name = gameName.getText().toString();
+                final String description = gameDescription.getText().toString();
+                final String instructions = gameInstructions.getText().toString();
+                final String category = gameCategory.getText().toString();
+
+                final ArrayList<Question> questions = new ArrayList<>();
+                final int gameId = Controller.getGames().size() + 1;
+
+                for (int i = 0; i < questionEditText.size(); ++i) {
+                    String newQuestion = questionEditText.get(i).getText().toString();
+                    String newAnswer = answerEditText.get(i).getText().toString();
+                    Question q = new Question(newQuestion, newAnswer, false);
+                    questions.add(q);
+                }
+
                 Teacher teacher = (Teacher) Controller.getLoggedInUser();
-                Log.i("game name", name);
                 teacher.addGame(gameId, 5, name, description, instructions, category, questions);
                 Intent intent = new Intent(context, ViewGamesActivity.class);
                 intent.putExtra("accountType", "Teacher");

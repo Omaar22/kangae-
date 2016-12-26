@@ -100,6 +100,7 @@ public class ViewGamesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(context, GameInfoActivity.class);
+                Log.d("Omar", "onItemClick: " +  games.get(i).getName() + " " + games.get(i).getQuestions().size());
                 intent.putExtra("game", games.get(i));
                 startActivity(intent);
             }

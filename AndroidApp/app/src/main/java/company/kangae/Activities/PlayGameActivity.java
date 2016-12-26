@@ -3,6 +3,7 @@ package company.kangae.Activities;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,12 +29,13 @@ public class PlayGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_game);
 
         game = getIntent().getParcelableExtra("game");
-        
+        viewQuestions();
     }
 
     public void viewQuestions (){
 
         final ArrayList <Question> questions = game.getQuestions();
+        Log.d("Omar", "viewQuestions::::: " + game.getName() + " " + game.getQuestions().size());
         int numOfQuestions = questions.size();
         int cnt = 0;
         int correctAnswers = 0;
@@ -68,16 +70,18 @@ public class PlayGameActivity extends AppCompatActivity {
 
         }
 
-        ArrayList<Score> scores = ((Student) Controller.getLoggedInUser()).getScores();
-        boolean found = false;
-        for (int i = 0; i < scores.size(); i++)
-            if (scores.get(i).getGameId() == game.getId() && scores.get(i).getScore() < correctAnswers) {
-                scores.get(i).setScore(correctAnswers);
-            } else if (scores.get(i).getGameId() == game.getId()) found = true;
+        if (Controller.getLoggedInUser() instanceof Student) {
+            ArrayList<Score> scores = ((Student) Controller.getLoggedInUser()).getScores();
+            boolean found = false;
+            for (int i = 0; i < scores.size(); i++)
+                if (scores.get(i).getGameId() == game.getId() && scores.get(i).getScore() < correctAnswers) {
+                    scores.get(i).setScore(correctAnswers);
+                } else if (scores.get(i).getGameId() == game.getId()) found = true;
 
-        if (!found) {
-            Score score = new Score(game.getId(), correctAnswers);
-            ((Student) Controller.getLoggedInUser()).setScore(score);
+            if (!found) {
+                Score score = new Score(game.getId(), correctAnswers);
+                ((Student) Controller.getLoggedInUser()).setScore(score);
+            }
         }
 
 
