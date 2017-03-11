@@ -1,0 +1,44 @@
+package swe;
+
+import java.io.FileNotFoundException;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class AccountTest {
+Account account=new Account();
+@DataProvider (name="test_for_search")
+public static Object [][] test_data (){
+return new Object [][]{{"khadega","khadega",1},{"omar","omar",2}};
+
+}
+ 
+  @Test (dataProvider="test_for_search")
+  public void Search1(String result ,String user_name,String password) throws FileNotFoundException {
+	  Assert.assertEquals(result,account.Search1(user_name,password) );
+
+  }
+}
+
+
+package swe;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class LoginTest {
+ Login user= new Login();
+ @DataProvider (name="test_for_login")
+ public static Object [][] test_data (){
+ return new Object [][]{{true,"khadega","1"},{true,"omar","2"},};
+
+ }
+  @Test (dataProvider ="test_for_login")
+  public void Check_test(boolean result,String userName,String password) {
+	  Assert.assertEquals(result,user.Check_test(userName, password) );
+
+	  
+  }
+}
