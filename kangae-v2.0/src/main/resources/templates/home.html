@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Kangae</title>
+
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <link href="../static/css/signup.css" th:href="@{/css/signup.css}" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+
+<div class="float">
+    <form action="/" method="get">
+        <button style="font-size: 40px" class="btn-outline-primary" type="submit">kangae(考え)</button>
+    </form>
+</div>
+
+<div class="main">
+    <div class="container">
+        <form action="/signup" method="get" class="form-signup">
+            <h2>Menu</h2>
+            <br/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        </form>
+        <form action="/signin" method="get" class="form-signup">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+        </form>
+    </div> <!-- /container -->
+</div> <!-- /main-->
+</body>
+</html>
