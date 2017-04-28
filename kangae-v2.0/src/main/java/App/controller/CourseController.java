@@ -30,8 +30,22 @@ public class CourseController {
     public String addCourse(@ModelAttribute(value = "course") Course course) {
         // todo: check
         course.setTeacher((Teacher) userService.getLoggedInUser());
-        courseservice.addCourse(course);
-        return "redirect:/";
+        ArrayList<Course> courses=new ArrayList<Course>();
+        courses=courseservice.getALLCourses();
+        boolean flag=false;
+        for(int i=0;i<courses.size();i++){
+            if(courses.get(i).getName().equals(course.getName())){
+                flag=true;
+                break;
+            }
+        }
+        if(flag){
+            return "redirect:/courses";
+        }
+        else {
+            courseservice.addCourse(course);
+            return "redirect:/";
+        }
     }
 
     @RequestMapping(value = "/course/create")
