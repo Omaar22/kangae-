@@ -12,13 +12,17 @@ public class UserService {
 
     private User loggedInUser;
 
+    public boolean isLoggedIn() {
+        return loggedInUser != null;
+    }
 
-    public User signin(String email, String password) {
+    public boolean signin(String email, String password) {
         User user = userBaseRepository.findByEmail(email);
         if (password != null && user != null && password.equals(user.getPassword())) {
-            return loggedInUser = user;
+            loggedInUser = user;
+            return true;
         }
-        return null;
+        return false;
     }
 
     public void signOut() {

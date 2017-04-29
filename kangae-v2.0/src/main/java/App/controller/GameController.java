@@ -28,11 +28,11 @@ public class GameController {
 
 
     @RequestMapping(value = "/course/{courseName}/create/game")
-    public String showCourse(@PathVariable String courseName, Model model) {
-        Game game = new Game();
+    public String createGame(@PathVariable String courseName, @ModelAttribute(value = "game") Game game, Model model) {
         game.setCourse(courseService.getCourse(courseName));
-        if (game.getCourse() == null || game.getCourse().getTeacher().equals(userService.getLoggedInUser())) {
-            return "redirect:/"; // todo: return error message
+        if (game.getCourse() == null || !userService.isLoggedIn()
+                || !game.getCourse().getTeacher().getEmail().equals(userService.getLoggedInUser().getEmail())) {
+            return "redirect:/";
         } else {
             model.addAttribute("game", game);
             return "/create_game_in_course";
@@ -40,32 +40,36 @@ public class GameController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/course/{courseName}/create/game")
-    public String addGame(@ModelAttribute(value = "game") Game game, @PathVariable String courseName) {
-        // todo: check
-        game.setCourse(courseService.getCourse(courseName));
-        gameservice.addGame(game);
-        return "redirect:/course/" + courseName;
+    public String addGame(@ModelAttribute(value = "game") Game game, @PathVariable String courseName, Model model) {
+        if (gameservice.isValid(game)) {
+            game.setCourse(courseService.getCourse(courseName)); // for some reason this MUST be done again!
+            gameservice.addGame(game);
+            return "redirect:/course/" + courseName;
+        } else {
+            model.addAttribute("errorMessage", "Name is already taken.");
+            return createGame(courseName, game, model);
+        }
     }
 
     @RequestMapping(value = "/course/{courseName}/{gameName}")
     public String playGame(@PathVariable String courseName, @PathVariable String gameName, Model model) {
-        // todo: check
         Game game = gameservice.getGameInCourse(courseName, gameName);
-        game.setAnswer("");
-        model.addAttribute("game", game);
-
-        return "/play_game";
+        if (game == null) {
+            return "redirect:/";
+        } else {
+            game.setAnswer("");
+            model.addAttribute("game", game);
+            return "/play_game";
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/course/{courseName}/{gameName}")
     public String judge(@ModelAttribute(value = "game") Game game, Model model,
                         @PathVariable("courseName") String courseName, @PathVariable("gameName") String gameName) {
-        // todo: check
-
         Game originalGame = gameservice.getGameInCourse(courseName, gameName);
         model.addAttribute("game", originalGame);
         if (game.getAnswer().equals(originalGame.getAnswer())) {
-//             todo: only increment if not played before
+            // todo: only increment if not played before
             if (userService.getLoggedInUser() instanceof Student) {
                 studentService.incrementScore(userService.getLoggedInUser().getId());
                 ((Student) userService.getLoggedInUser()).incrementScore();

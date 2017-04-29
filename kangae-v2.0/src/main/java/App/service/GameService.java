@@ -49,6 +49,9 @@ public class GameService {
         return gameRepo.findByCourseTeacherEmail(teacherEmail);
     }
 
+    public boolean isValid(Game game) {
+        return gameRepo.findByName(game.getName()) == null;
+    }
 }
 
 

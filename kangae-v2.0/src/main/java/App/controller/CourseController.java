@@ -25,26 +25,30 @@ public class CourseController {
 
     @RequestMapping("/courses")
     public String courses(Model model) {
-        ArrayList<Course> all = courseservice.getALLCourses();
-        model.addAttribute("courses", all);
+        model.addAttribute("courses", courseservice.getALLCourses());
         return "/show_courses";
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/addcourse")
-    public String addCourse(@ModelAttribute(value = "course") Course course) {
-        // todo: check
-        course.setTeacher((Teacher) userService.getLoggedInUser());
-        courseservice.addCourse(course);
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/course/create")
     public String addCourse(Model model) {
-        if (userService.getLoggedInUser() != null && userService.getLoggedInUser() instanceof Teacher) { // authorized
-            model.addAttribute("course", new Course());
+        if (userService.isLoggedIn() && userService.getLoggedInUser() instanceof Teacher) { // authorized
+            if (!model.containsAttribute("course"))
+                model.addAttribute("course", new Course());
             return "/create_course";
         } else {
-            return "redirect:/"; // todo: return 'Not Authorized' message
+            return "redirect:/";
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/course/create")
+    public String addCourse(@ModelAttribute(value = "course") Course course, Model model) {
+        if (!courseservice.isValid(course)) {
+            model.addAttribute("errorMessage", "Name already taken.");
+            return addCourse(model);
+        } else {
+            course.setTeacher((Teacher) userService.getLoggedInUser());
+            courseservice.addCourse(course);
+            return "redirect:/";
         }
     }
 

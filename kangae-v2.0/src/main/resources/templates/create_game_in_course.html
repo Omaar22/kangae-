@@ -45,6 +45,7 @@
         <input th:field="${game.answer}" id="inputGameAnswer" class="form-control" placeholder="Answer"
                th:required="required"/>
 
+        <h6 class="form-signin-heading" th:text="${errorMessage}" style="color: red"></h6>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
 
     </form>

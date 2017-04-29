@@ -17,19 +17,20 @@ public class SigninController {
 
     @RequestMapping("/signin")
     public String signin(Model model) {
-        if (userService.getLoggedInUser() == null) { // not logged in
-            model.addAttribute("user", new User());
+        if (!userService.isLoggedIn()) {
+            if(!model.containsAttribute("user"))
+                model.addAttribute("user", new User());
             return "/signin";
         } else {
-            return "redirect:/"; // todo: return 'already logged in' message
+            return "redirect:/";
         }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signin")
     public String signin(@ModelAttribute(value = "user") User user, Model model) {
-        if (userService.signin(user.getEmail(), user.getPassword()) == null) {
-            model.addAttribute("user", new User());
-            return "redirect:/signin"; // todo: return error message
+        if (!userService.signin(user.getEmail(), user.getPassword())) {
+            model.addAttribute("errorMessage", "Wrong email or password!");
+            return signin(model);
         } else {
             return "redirect:/";
         }

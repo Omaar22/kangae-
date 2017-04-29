@@ -37,6 +37,10 @@ public class CourseService {
     public ArrayList<Course> getCoursesByTeacher(String teacherEmail) {
         return courseRepo.findByTeacherEmail(teacherEmail);
     }
+
+    public boolean isValid(Course course) {
+        return courseRepo.findByName(course.getName()) == null;
+    }
 }
 
 

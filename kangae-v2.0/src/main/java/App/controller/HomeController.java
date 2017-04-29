@@ -22,7 +22,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        if (userService.getLoggedInUser() == null) { // not logged in
+        if (!userService.isLoggedIn()) {
             return "/home";
         } else {
             model.addAttribute("user", userService.getLoggedInUser());
@@ -32,7 +32,7 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public String profile(Model model) {
-        if (userService.getLoggedInUser() == null) { // not logged in
+        if (!userService.isLoggedIn()) {
             return "redirect:/";
         } else {
             model.addAttribute("user", userService.getLoggedInUser());
