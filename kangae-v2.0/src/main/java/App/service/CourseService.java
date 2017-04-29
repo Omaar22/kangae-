@@ -22,8 +22,8 @@ public class CourseService {
         courseRepo.save(course);
     }
 
-    public Course getCourse(int id) {
-        return courseRepo.findOne(id);
+    public Course getCourse(String courseName) {
+        return courseRepo.findByName(courseName);
     }
 
     public Course updateCourse(int id, Course course) {
@@ -34,6 +34,9 @@ public class CourseService {
         courseRepo.delete(course);
     }
 
+    public ArrayList<Course> getCoursesByTeacher(String teacherEmail) {
+        return courseRepo.findByTeacherEmail(teacherEmail);
+    }
 }
 
 

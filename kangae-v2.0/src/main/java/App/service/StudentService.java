@@ -13,4 +13,11 @@ public class StudentService {
     public Iterable<Student> getAll() {
         return studentRepository.findAll();
     }
+
+    public void incrementScore(long id) {
+        Student s = studentRepository.findOne(id);
+        s.incrementScore();
+        studentRepository.save(s);
+    }
+
 }

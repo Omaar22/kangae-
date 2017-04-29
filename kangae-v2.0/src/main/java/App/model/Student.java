@@ -3,7 +3,7 @@ package App.model;
 import javax.persistence.Entity;
 
 @Entity
-public class Student extends User{
+public class Student extends User {
     private int score = 0;
     private String collegeSchool;
 
@@ -21,5 +21,9 @@ public class Student extends User{
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void incrementScore() {
+        ++score;
     }
 }
