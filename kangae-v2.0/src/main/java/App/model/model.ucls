@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="App.model.Course" project="Kangae" 
     file="/Kangae/src/main/java/App/model/Course.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="243" width="150" x="358" y="536"/>    
+    <position height="-1" width="-1" x="639" y="631"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="App.model.Game" project="Kangae" file="/Kangae/src/main/java/App/model/Game.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="459" width="252" x="256" y="37"/>    
+    <position height="-1" width="-1" x="517" y="264"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="App.model.Student" project="Kangae" 
     file="/Kangae/src/main/java/App/model/Student.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="168" x="41" y="1089"/>    
+    <position height="-1" width="-1" x="153" y="671"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="App.model.Teacher" project="Kangae" 
     file="/Kangae/src/main/java/App/model/Teacher.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="168" x="249" y="1089"/>    
+    <position height="-1" width="-1" x="388" y="691"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="App.model.User" project="Kangae" file="/Kangae/src/main/java/App/model/User.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="513" width="277" x="41" y="536"/>    
+    <position height="-1" width="-1" x="181" y="281"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,8 +48,12 @@
   </class>  
   <association id="6">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="7" name="teacher"/>      
-      <multiplicity id="8" minimum="0" maximum="1"/>    
+      <attribute id="7" name="teacher">        
+        <position height="0" width="0" x="55" y="-465"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="55" y="-465"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
@@ -58,18 +62,22 @@
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="11">    
+  <association id="10">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="course"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+      <attribute id="11" name="course">        
+        <position height="0" width="0" x="206" y="-26"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="0" width="0" x="206" y="-26"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

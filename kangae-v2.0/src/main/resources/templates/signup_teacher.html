@@ -27,11 +27,17 @@
     <input th:field="${teacher.email}" type="email" id="inputEmail" class="form-control" placeholder="Email address"
            th:required="required"/>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input th:field="${teacher.password}" type="password" id="inputPassword" class="form-control"
+    <input th:field="${teacher.password}" type="password" minlength="6" id="inputPassword" class="form-control"
            placeholder="Password" th:required="required"/>
     <label for="inputCollegeSchool" class="sr-only">College School</label>
     <input th:field="${teacher.collegeSchool}" id="inputCollegeSchool" class="form-control"
            placeholder="CollegeSchool" th:required="required"/>
+    <label for="inputGender" class="sr-only">Gender</label>
+    <input th:field="${teacher.gender}" type="text" id="inputGender" class="form-control" placeholder="Gender"/>
+    <label for="inputAge" class="sr-only">Age</label>
+    <input th:field="${teacher.age}" type="text" id="inputAge" class="form-control" placeholder="Age"/>
+    <label for="inputBirthdate" class="sr-only">Birthdate</label>
+    <input th:field="${teacher.birthDate}" type="date" id="inputBirthDate" class="form-control" placeholder="Birthdate"/>
     <h6 class="form-signin-heading" th:text="${errorMessage}" style="color: red"></h6>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
 </form>

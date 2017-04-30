@@ -8,7 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class CreateGameTest {
+public class CreateCourseTest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,15 +22,11 @@ public class CreateGameTest {
   }
 
   @Test
-  public void testCreateGame() throws Exception {
-    driver.get(baseUrl + "/course/algorthims");
-    driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
-    driver.findElement(By.id("inputGameName")).clear();
-    driver.findElement(By.id("inputGameName")).sendKeys("xo");
-    driver.findElement(By.id("inputGameDescription")).clear();
-    driver.findElement(By.id("inputGameDescription")).sendKeys("descreption");
-    driver.findElement(By.id("inputGameInstructions")).clear();
-    driver.findElement(By.id("inputGameInstructions")).sendKeys("instruction");
+  public void testCreateCourse() throws Exception {
+    driver.get(baseUrl + "/");
+    driver.findElement(By.xpath("(//button[@type='submit'])[4]")).click();
+    driver.findElement(By.id("inputCourseName")).clear();
+    driver.findElement(By.id("inputCourseName")).sendKeys("math");
     driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
   }
 

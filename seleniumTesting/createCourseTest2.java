@@ -8,7 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SigninTest {
+public class CreateCourseTest2 {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,13 +22,11 @@ public class SigninTest {
   }
 
   @Test
-  public void testSignin() throws Exception {
+  public void testCreateCourseTest2() throws Exception {
     driver.get(baseUrl + "/");
-    driver.findElement(By.xpath("(//button[@type='submit'])[3]")).click();
-    driver.findElement(By.id("inputEmail")).clear();
-    driver.findElement(By.id("inputEmail")).sendKeys("khadiga.osman16@gmail.com");
-    driver.findElement(By.id("inputPassword")).clear();
-    driver.findElement(By.id("inputPassword")).sendKeys("123456");
+    driver.findElement(By.xpath("(//button[@type='submit'])[4]")).click();
+    driver.findElement(By.id("inputCourseName")).clear();
+    driver.findElement(By.id("inputCourseName")).sendKeys("math2");
     driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
   }
 

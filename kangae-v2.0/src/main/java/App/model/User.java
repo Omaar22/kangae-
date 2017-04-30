@@ -18,7 +18,6 @@ public class User {
     @Size(min = 6)
     private String password;
     private String gender;
-    private String role;
     private String birthDate;
 
     public long getId() {
@@ -66,14 +65,6 @@ public class User {
         this.gender = gender;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getBirthDate() {
         return birthDate;
     }
@@ -85,14 +76,13 @@ public class User {
     public User() {
     }
 
-    public User(long id, String email, String name, int age, String password, String gender, String role, String birthDate) {
+    public User(long id, String email, String name, int age, String password, String gender, String birthDate) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.age = age;
         this.password = password;
         this.gender = gender;
-        this.role = role;
         this.birthDate = birthDate;
     }
 }

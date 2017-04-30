@@ -8,7 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class CreateCourseTest {
+public class Signuptest {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -22,11 +22,24 @@ public class CreateCourseTest {
   }
 
   @Test
-  public void testCreateCourse() throws Exception {
+  public void testSignup() throws Exception {
     driver.get(baseUrl + "/");
-    driver.findElement(By.xpath("(//button[@type='submit'])[4]")).click();
-    driver.findElement(By.id("inputCourseName")).clear();
-    driver.findElement(By.id("inputCourseName")).sendKeys("algorthims");
+    driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
+    driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
+    driver.findElement(By.id("inputName")).clear();
+    driver.findElement(By.id("inputName")).sendKeys("khadega");
+    driver.findElement(By.id("inputEmail")).clear();
+    driver.findElement(By.id("inputEmail")).sendKeys("khadiga@gmail");
+    driver.findElement(By.id("inputPassword")).clear();
+    driver.findElement(By.id("inputPassword")).sendKeys("123456");
+    driver.findElement(By.id("inputCollegeSchool")).clear();
+    driver.findElement(By.id("inputCollegeSchool")).sendKeys("fci");
+    driver.findElement(By.id("inputGender")).clear();
+    driver.findElement(By.id("inputGender")).sendKeys("f");
+    driver.findElement(By.id("inputAge")).clear();
+    driver.findElement(By.id("inputAge")).sendKeys("21");
+    driver.findElement(By.id("inputBirthDate")).clear();
+    driver.findElement(By.id("inputBirthDate")).sendKeys("10-1");
     driver.findElement(By.xpath("(//button[@type='submit'])[2]")).click();
   }
 
