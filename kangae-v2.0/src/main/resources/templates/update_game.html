@@ -23,30 +23,30 @@
 </div>
 
 <div class="container">
-    <form th:action="@{'/course/' + ${game.course.name} + '/create/game'}" th:object="${game}" method="post" class="form-signin">
-        <h2 class="form-signin-heading">Create Game</h2>
-        <label for="inputGameName" class="sr-only">game Name</label>
-        <input th:field="${game.name}" id="inputGameName" class="form-control" placeholder="Game Name"
+    <form th:action="@{'/course/' + ${courseName} + '/updategame/' + ${gameName}}" th:object="${game}" method="post" class="form-signin">
+        <h2 class="form-signin-heading">Update Game</h2>
+        Name
+        <input th:field="${game.name}"  id="inputGameName" class="form-control"
                th:required="required"/>
 
-        <label for="inputGameDescription" class="sr-only">game Description</label>
-        <input th:field="${game.description}" id="inputGameDescription" class="form-control" placeholder="Game Description"
+        Description
+        <input th:field="${game.description}" id="inputGameDescription" class="form-control"
                th:required="required"/>
 
-        <label for="inputGameInstructions" class="sr-only">game Instructions</label>
-        <input th:field="${game.instruction}" id="inputGameInstructions" class="form-control" placeholder="Game Instructions"
+        Instructions
+        <input th:field="${game.instruction}" id="inputGameInstructions" class="form-control"
                th:required="required"/>
 
-        <label for="inputGameQuestion" class="sr-only">game Instructions</label>
-        <input th:field="${game.question}" id="inputGameQuestion" class="form-control" placeholder="Question"
+        Question
+        <input th:field="${game.question}" id="inputGameQuestion" class="form-control"
                th:required="required"/>
 
-        <label for="inputGameAnswer" class="sr-only">game Answer </label>
-        <input th:field="${game.answer}" id="inputGameAnswer" class="form-control" placeholder="Answer"
+        Answer
+        <input th:field="${game.answer}" id="inputGameAnswer" class="form-control"
                th:required="required"/>
 
         <h6 class="form-signin-heading" th:text="${errorMessage}" style="color: red"></h6>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
 
     </form>
 </div> <!-- /container -->

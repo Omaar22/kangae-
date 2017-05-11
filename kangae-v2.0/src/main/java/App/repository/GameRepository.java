@@ -15,4 +15,6 @@ public interface GameRepository extends CrudRepository<Game, String>{
     Game findByCourseNameAndName(String courseName, String name);
 
     Game findByName(String name);
+
+    Game findById(long id);
 }

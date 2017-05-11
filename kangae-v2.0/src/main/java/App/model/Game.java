@@ -20,6 +20,16 @@ public class Game {
     @NotNull
     private String answer;
 
+    public int getNumOfCopies() {
+        return numOfCopies;
+    }
+
+    public void setNumOfCopies(int numOfCopies) {
+        this.numOfCopies = numOfCopies;
+    }
+
+    private int numOfCopies;
+
     @ManyToOne
     @JoinColumn(name = "courseId")
     private Course course;

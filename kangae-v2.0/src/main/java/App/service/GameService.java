@@ -33,11 +33,11 @@ public class GameService {
         return gameRepo.findOne(id);
     }
 
-    public Game updateGame(String id, Game game) {
+    public Game updateGame(Game game) {
         return gameRepo.save(game);
     }
 
-    public void deleteGame(String id, Game game) {
+    public void deleteGame(Game game) {
         gameRepo.delete(game);
     }
 
@@ -51,6 +51,23 @@ public class GameService {
 
     public boolean isValid(Game game) {
         return gameRepo.findByName(game.getName()) == null;
+    }
+
+    public Game copyGame(Game game){
+        Game newGame = new Game(game.getName(), game.getDescription(), game.getInstruction(), game.getQuestion(), game.getAnswer(), game.getCourse());
+        newGame.setName(newGame.getName() + "-copy " + Integer.toString(game.getNumOfCopies() + 1) );
+        //TODO:check if changes
+        game.setNumOfCopies(game.getNumOfCopies() + 1);
+        return newGame;
+    }
+
+    public boolean isExist(long id){
+        if(gameRepo.findById(id) !=null){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 
