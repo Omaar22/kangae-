@@ -16,20 +16,41 @@
 
 <body>
 
-<div class="float">
+<div>
     <form action="/" method="get">
         <button style="font-size: 40px" class="btn-outline-primary" type="submit">kangae(考え)</button>
     </form>
 </div>
 
-<form th:action="@{'/course/' + ${game.course.name} + '/updategame/' + ${game.name}}" method="get" style="float: left; padding-left: 5px">
-    <button style="font-size: 40px" class="btn-outline-primary" type="submit">Update game</button>
-</form>
+<h2 class="form-signin" th:text="${game.name}">Game Name</h2>
 
-<form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}" method="get" style="float: left; padding-left: 5px">
-    <button style="font-size: 40px" class="btn-outline-primary" type="submit">Play game</button>
-</form>
+<div>
+    <form th:action="@{'/course/' + ${game.course.name} + '/updategame/' + ${game.name}}" method="get"
+          style="float: left; padding-left: 5px">
+        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Update game</button>
+    </form>
 
+    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}" method="get" style=" padding-left: 5px">
+        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Play game</button>
+    </form>
+</div>
+
+<div>
+    <h2 class="form-signin">Comments</h2>
+
+    <div th:each="comment : ${comments}" class="form-signin">
+        <h5 th:text="${comment.user.name} + ': ' + comment.content"></h5>
+    </div>
+
+
+    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name} + '/comment'}" method="post"
+          style="float: left; padding-left: 5px">
+        <label for="addComment" class="sr-only">Comment</label>
+        <input th:field="${newComment.content}" id="addComment" class="form-control" placeholder="Comment"
+               th:required="required"/>
+        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Add Commet</button>
+    </form>
+</div>
 
 </body>
 </html>

@@ -1,12 +1,10 @@
 package App.controller;
 
+import App.model.Comment;
+import App.model.Course;
 import App.model.Game;
 import App.model.Student;
-import App.service.CourseService;
-import App.service.GameService;
-import App.service.StudentService;
-import App.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import App.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,8 @@ public class GameController {
     private CourseService courseService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private CommentService commentService;
 
 
     @RequestMapping(value = "/course/{courseName}/create/game")
@@ -62,15 +62,15 @@ public class GameController {
         }
     }
 
-
-
     @RequestMapping(value = "/course/{courseName}/{gameName}/options")
-    public String playandeditGame(@PathVariable String courseName, @PathVariable String gameName, Model model) {
+    public String playAndEditGame(@PathVariable String courseName, @PathVariable String gameName, Model model) {
         Game game = gameservice.getGameInCourse(courseName, gameName);
         if (game == null) {
             return "redirect:/";
         } else {
-            model.addAttribute("game",game);
+            model.addAttribute("game", game);
+            model.addAttribute("comments", commentService.getCommentsInGame(gameName));
+            model.addAttribute("newComment", new Comment());
             return "/play_edit_game";
         }
     }
@@ -79,9 +79,8 @@ public class GameController {
     public String update(@PathVariable String courseName, @PathVariable String gameName, Model model) {
         Game game = gameservice.getGameInCourse(courseName, gameName);
 
-        if( userService.isLoggedIn() && game.getCourse().getTeacher().getEmail().equals(userService.getLoggedInUser().getEmail())){
+        if (userService.isLoggedIn() && game.getCourse().getTeacher().getEmail().equals(userService.getLoggedInUser().getEmail())) {
             model.addAttribute("game", game);
-            System.out.println(game.getId());
             return "/update_game"; //has form
         }
 
@@ -89,24 +88,21 @@ public class GameController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/course/{courseName}/updategame/{gameName}")
-    public String update (@ModelAttribute(value = "game") Game game, @PathVariable String courseName, @PathVariable String gameName, Model model) {
-
+    public String update(@ModelAttribute(value = "game") Game game, @PathVariable String courseName, @PathVariable String gameName, Model model) {
         Game oldGame = gameservice.getGameInCourse(courseName, gameName);
-
+        gameservice.deleteGame(oldGame);
         if (gameservice.isValid(game)) {
-
             oldGame.setName(game.getName());
             oldGame.setDescription(game.getDescription());
             oldGame.setInstruction(game.getInstruction());
             oldGame.setAnswer(game.getAnswer());
             oldGame.setQuestion(game.getQuestion());
-            System.out.println(oldGame.getId());
             gameservice.addGame(oldGame);
-
             return "redirect:/course/" + courseName;
         } else {
+            gameservice.addGame(oldGame);
             model.addAttribute("errorMessage", "Name is already taken.");
-            return createGame(courseName, game, model);
+            return update(courseName, oldGame.getName(), model);
         }
     }
 
@@ -127,23 +123,42 @@ public class GameController {
         }
     }
 
-    @RequestMapping (value = "/course/{courseName}/copy/game")
-    public String copyGame(Model model){
+    @RequestMapping(value = "/course/{targetCourse}/copy/game")
+    public String copyGame(@PathVariable("targetCourse") String targetCourse, Model model) {
         if (!userService.isLoggedIn() || userService.getLoggedInUser() instanceof Student) {
             return "redirect:/";
         } else {
-            ArrayList<Game> games = gameservice.getALLGame();
-            model.addAttribute("games", games);
+            model.addAttribute("games", gameservice.getALLGame());
             model.addAttribute("user", userService.getLoggedInUser());
+            model.addAttribute("targetCourse", targetCourse);
+
             return "/show_games";
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/course/{courseName}/{gameId}/copy")
-    public String copy(Model model, @PathVariable("courseName") String courseName, @PathVariable ("gameId") int gameId){
+    @RequestMapping(method = RequestMethod.GET, value = "/course/{targetCourse}/{gameName}/copy")
+    public String copy(Model model, @PathVariable("targetCourse") String targetCourse, @PathVariable("gameName") String gameName) {
+        Game game = gameservice.getGameByName(gameName);
+        Course newCourse = courseService.getCourse(targetCourse);
+        if (userService.isLoggedIn() && newCourse.getTeacher().getEmail().equals(userService.getLoggedInUser().getEmail())) {
+            model.addAttribute("game", gameservice.copyGame(game, newCourse));
+            return "/create_game_in_course";
+        } else {
+            return "redirect:/";
+        }
+    }
 
-
-    return "";
+    @RequestMapping(method = RequestMethod.POST, value = "/course/{courseName}/{gameName}/comment")
+    public String addComment(@ModelAttribute(value = "comment") Comment comment, Model model,
+                             @PathVariable("courseName") String courseName, @PathVariable("gameName") String gameName) {
+        if (userService.isLoggedIn()) {
+            comment.setGame(gameservice.getGameByName(gameName));
+            comment.setUser(userService.getLoggedInUser());
+            commentService.addComment(comment);
+            return playAndEditGame(courseName, gameName, model);
+        } else {
+            return "redirect:/";
+        }
     }
 
 
