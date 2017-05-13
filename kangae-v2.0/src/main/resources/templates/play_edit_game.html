@@ -39,7 +39,7 @@
     <h2 class="form-signin">Comments</h2>
 
     <div th:each="comment : ${comments}" class="form-signin">
-        <h5 th:text="${comment.user.name} + ': ' + ${comment.content}"></h5>
+        <h6 th:text="${comment.user.name} + ': ' + ${comment.content}"></h6>
     </div>
 
 

@@ -24,6 +24,8 @@ public class GameController {
     private StudentService studentService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private NotificationService notificationService;
 
 
     @RequestMapping(value = "/course/{courseName}/create/game")
@@ -155,6 +157,7 @@ public class GameController {
             comment.setGame(gameservice.getGameByName(gameName));
             comment.setUser(userService.getLoggedInUser());
             commentService.addComment(comment);
+            notificationService.notifyUser(comment, comment.getGame().getCourse().getTeacher());
             return playAndEditGame(courseName, gameName, model);
         } else {
             return "redirect:/";
