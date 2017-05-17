@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public boolean signup(User user) {
-        if (!valid(user)) {
+        if (!isNewEmail(user)) {
             return false;
         }
         userBaseRepository.save(user);
@@ -38,9 +38,8 @@ public class UserService {
         return true;
     }
 
-    boolean valid(User user) {
-        return !(user == null || user.getEmail() == null || user.getPassword() == null || user.getPassword().length() < 6
-                || user.getName() == null || userBaseRepository.findByEmail(user.getEmail()) != null);
+    boolean isNewEmail(User user) {
+        return userBaseRepository.findByEmail(user.getEmail()) == null;
     }
 
     public User getLoggedInUser() {

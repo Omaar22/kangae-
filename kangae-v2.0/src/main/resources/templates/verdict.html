@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${game.name}">Game Name</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div th:replace="fragments/header-in::header"></div>
+
+<div class="container">
+    <h1 class="modal-header" th:text="${game.name}">Game Name</h1>
+    <form th:action="@{${url}}" class="form">
+        <h1 th:style="'color:' + ${color} + '; font-size: 75px'" th:text="${verdict}">ACCEPTED</h1>
+        <br/>
+        <button class="btn btn-lg btn-default btn-block" type="submit" th:text="${next} ">Next</button>
+
+    </form>
+</div>
+</body>
+</html>

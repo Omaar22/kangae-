@@ -1,54 +1,42 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
     <title th:text="${game.name}">Game Name</title>
-
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
-    <link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 
 <body>
+<div th:replace="fragments/header-in::header"></div>
+
+<h1 class="modal-header" th:text="${game.name}">Game Name</h1>
 
 <div>
-    <form action="/" method="get">
-        <button style="font-size: 40px" class="btn-outline-primary" type="submit">kangae(考え)</button>
+    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}">
+        <button class="btn btn-lg btn-success" type="submit" style="float: left; margin-left: 5px">
+            Play game
+        </button>
+    </form>
+    <form th:action="@{'/course/' + ${game.course.name} + '/update/' + ${game.name}}">
+        <button class="btn btn-lg btn-warning" type="submit" style="float: left; margin-left: 5px">
+            Update game
+        </button>
+    </form>
+    <form th:action="@{'/course/' + ${game.course.name} + '/cancel/' + ${game.name}}">
+        <button class="btn btn-lg btn-danger" type="submit" style="margin-left: 5px">Cancel game
+        </button>
     </form>
 </div>
 
-<h2 class="form-signin" th:text="${game.name}">Game Name</h2>
-
-<div>
-    <form th:action="@{'/course/' + ${game.course.name} + '/updategame/' + ${game.name}}" method="get"
-          style="float: left; padding-left: 5px">
-        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Update game</button>
-    </form>
-
-    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}" method="get" style=" padding-left: 5px">
-        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Play game</button>
-    </form>
-</div>
-
-<div>
-    <h2 class="form-signin">Comments</h2>
-
-    <div th:each="comment : ${comments}" class="form-signin">
-        <h6 th:text="${comment.user.name} + ': ' + ${comment.content}"></h6>
+<h2 class="container modal-header">Comments</h2>
+<div class="form" style="padding-top: 0%">
+    <div th:each="comment : ${comments}">
+        <h3 th:text="${comment.user.name} + ': ' + ${comment.content}">Comment</h3>
     </div>
-
-
-    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name} + '/comment'}" method="post"
-          style="float: left; padding-left: 5px">
-        <label for="addComment" class="sr-only">Comment</label>
-        <input th:field="${newComment.content}" id="addComment" class="form-control" placeholder="Comment"
-               th:required="required"/>
-        <button style="font-size: 40px" class="btn-outline-primary" type="submit">Add Commet</button>
+    <br/>
+    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name} + '/comment'}" method="post">
+        <input th:field="${newComment.content}" class="form-control" placeholder="Write Comment" th:required="required"/>
+        <button class="btn btn-lg btn-default btn-block" type="submit">Commet</button>
     </form>
 </div>
 

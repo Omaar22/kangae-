@@ -7,13 +7,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String content;
-
     @ManyToOne
     @JoinColumn(name = "gameId")
     private Game game;
-
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;

@@ -19,5 +19,4 @@ public class StudentService {
         s.incrementScore();
         studentRepository.save(s);
     }
-
 }

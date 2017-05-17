@@ -65,6 +65,7 @@ public class HomeController {
             model.addAttribute("user", userService.getLoggedInUser());
             model.addAttribute("courseCount", courseService.getCoursesByTeacher(userService.getLoggedInUser().getEmail()).size());
             model.addAttribute("gamesCount", gameService.getGamesByTeacherEmail(userService.getLoggedInUser().getEmail()).size());
+            model.addAttribute("unreadNotificationsCount", notificationService.getUnreadNotificationsForUser(userService.getLoggedInUser()).size());
             return "/profile";
         }
     }

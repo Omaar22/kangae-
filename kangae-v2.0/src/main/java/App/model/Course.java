@@ -12,7 +12,6 @@ public class Course {
     @NotNull
     @Column(unique = true)
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "teacherId")
     private Teacher teacher;

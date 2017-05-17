@@ -1,40 +1,21 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
     <title>Sign in</title>
-
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
-    <link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet" media="screen"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 
 <body>
-
-<div class="float">
-    <form action="/" method="get">
-        <button style="font-size: 40px" class="btn-outline-primary" type="submit">kangae(考え)</button>
-    </form>
-</div>
+<div th:replace="fragments/header::header"></div>
 
 <div class="container">
-    <form th:action="@{/signin}" method="post" class="form-signin">
-        <h2 class="form-signin-heading">Sign In</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input th:field="${user.email}" type="email" id="inputEmail" class="form-control" placeholder="Email address"
-               th:required="required"/>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input th:field="${user.password}" type="password" id="inputPassword" class="form-control"
-               placeholder="Password" th:required="required"/>
-        <h6 class="form-signin-heading" th:text="${errorMessage}" style="color: red"></h6>
+    <form th:action="@{/signin}" method="post" class="form">
+        <h1 class="form-heading">Sign In</h1>
+        <input th:field="${user.email}" type="email" class="form-control" placeholder="Email address" required="required"/>
+        <input th:field="${user.password}" type="password" class="form-control" placeholder="Password" required="required"/>
+        <h6 th:text="${errorMessage}" style="color: red"></h6>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
     </form>
-</div> <!-- /container -->
+</div>
 </body>
 </html>

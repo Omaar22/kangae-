@@ -1,5 +1,6 @@
 package App.controller;
 
+import App.model.Comment;
 import App.model.Student;
 import App.model.Teacher;
 import App.model.User;
@@ -10,7 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Controller
 public class SignupController {
@@ -18,53 +23,30 @@ public class SignupController {
     private UserService userService;
 
     @RequestMapping("/signup")
-    public String signup() {
-        if (!userService.isLoggedIn()) {
-            return "/signup";
-        } else {
-            return "redirect:/";
-        }
-    }
-
-    @RequestMapping("/signup/teacher")
-    public String signupTeacher(Model model) {
-        if (!userService.isLoggedIn()) {
-            if (!model.containsAttribute("teacher"))
-                model.addAttribute("teacher", new Teacher());
-            return "/signup_teacher";
-        } else {
-            return "redirect:/";
-        }
+    public String signup(Model model) {
+        if (!model.containsAttribute("user"))
+            model.addAttribute("user", new User());
+        return "/signup";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup/teacher")
-    public String signup(@ModelAttribute(value = "teacher") Teacher teacher, Model model) {
+    public String signupTeacher(@ModelAttribute(value = "user") User user, Model model) {
+        Teacher teacher = new Teacher(user);
         if (userService.signup(teacher)) {
             return "redirect:/";
         } else {
             model.addAttribute("errorMessage", "Incorrect data!");
-            return signupTeacher(model);
+            return signup(model);
         }
     }
-
-    @RequestMapping("/signup/student")
-    public String signupStudent(Model model) {
-        if (!userService.isLoggedIn()) {
-            if (!model.containsAttribute("student"))
-                model.addAttribute("student", new Student());
-            return "/signup_student";
-        } else {
-            return "redirect:/";
-        }
-    }
-
     @RequestMapping(method = RequestMethod.POST, value = "/signup/student")
-    public String signup(@ModelAttribute(value = "student") Student student, Model model) {
+    public String signupStudent(@ModelAttribute(value = "user") User user, Model model) {
+        Student student = new Student(user);
         if (userService.signup(student)) {
             return "redirect:/";
         } else {
             model.addAttribute("errorMessage", "Incorrect data!");
-            return signupStudent(model);
+            return signup(model);
         }
     }
 

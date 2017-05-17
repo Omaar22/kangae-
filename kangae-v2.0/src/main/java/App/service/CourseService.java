@@ -26,21 +26,11 @@ public class CourseService {
         return courseRepo.findByName(courseName);
     }
 
-    public Course updateCourse(int id, Course course) {
-        return courseRepo.save(course);
-    }
-
-    public void deleteCourse(int id, Course course) {
-        courseRepo.delete(course);
-    }
-
     public ArrayList<Course> getCoursesByTeacher(String teacherEmail) {
         return courseRepo.findByTeacherEmail(teacherEmail);
     }
 
-    public boolean isValid(Course course) {
+    public boolean isNewName(Course course) {
         return courseRepo.findByName(course.getName()) == null;
     }
 }
-
-

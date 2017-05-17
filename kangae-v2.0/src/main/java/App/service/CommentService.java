@@ -13,7 +13,7 @@ public class CommentService {
     private CommentRepository commentRepo;
 
     public ArrayList<Comment> getCommentsInGame(String gameName) {
-        return (ArrayList<Comment>) commentRepo.findByGameName(gameName);
+        return commentRepo.findByGameName(gameName);
     }
     public void addComment(Comment comment) {
         commentRepo.save(comment);

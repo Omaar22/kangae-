@@ -16,8 +16,6 @@ import java.util.List;
 public class GameService {
     @Autowired
     private GameRepository gameRepo;
-    @Autowired
-    private CourseRepository courseRepo;
 
     public ArrayList<Game> getALLGame() {
         return (ArrayList<Game>) gameRepo.findAll();
@@ -31,20 +29,8 @@ public class GameService {
         gameRepo.save(game);
     }
 
-    public Game getGame(String id) {
-        return gameRepo.findOne(id);
-    }
-
     public Game getGameByName(String name) {
         return gameRepo.findByName(name);
-    }
-
-    public Game updateGame(Game game) {
-        return gameRepo.save(game);
-    }
-
-    public void deleteGame(Game game) {
-        gameRepo.delete(game);
     }
 
     public Game getGameInCourse(String courseName, String gameName) {
@@ -55,7 +41,7 @@ public class GameService {
         return gameRepo.findByCourseTeacherEmail(teacherEmail);
     }
 
-    public boolean isValid(Game game) {
+    public boolean isNewName(Game game) {
         return gameRepo.findByName(game.getName()) == null;
     }
 
@@ -67,16 +53,4 @@ public class GameService {
         game.setNumOfCopies(game.getNumOfCopies() + 1);
         return newGame;
     }
-
-    public boolean isExist(long id) {
-        if (gameRepo.findById(id) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
-
-
-
