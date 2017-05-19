@@ -11,7 +11,6 @@
 <script type="text/javascript">
     function submitForm(action) {
         document.getElementById('signup').action = action;
-        document.getElementById('signup').submit();
     }
 </script>
 
@@ -27,9 +26,11 @@
     </select>
     <input th:field="${user.age}" class="form-control" placeholder="Age"/>
     <input th:field="${user.birthDate}" type="date" class="form-control" placeholder="Birthdate"/>
-    <h6 class="form-signin-heading" th:text="${errorMessage}" style="color: red"></h6>
-    <input type="button" onclick="submitForm('/signup/student')" value="I am a Student" class="btn btn-lg btn-primary" style="width: 50%;"/>
-    <input type="button" onclick="submitForm('/signup/teacher')" value="I am a Teacher" class="btn btn-lg btn-primary" style="width: 49%"/>
+    <div class="alert alert-danger" th:if="${errorMessage != null}">
+        <span style="color : #ff0000" th:text="${errorMessage}"></span>
+    </div>
+    <button type="submit" onclick="submitForm('/signup/student')" class="btn btn-lg btn-primary" style="width: 50%;">I am a Student</button>
+    <button type="submit" onclick="submitForm('/signup/teacher')" class="btn btn-lg btn-primary" style="width: 49%">I am a Teacher</button>
 </form>
 
 </body>

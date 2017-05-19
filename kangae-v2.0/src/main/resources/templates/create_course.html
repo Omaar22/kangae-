@@ -13,7 +13,9 @@
 <div class="container">
     <form th:action="@{/course/create}" method="post" class="form">
         <input th:field="${course.name}" class="form-control" placeholder="Course Name" required="required"/>
-        <h6 th:text="${errorMessage}" style="color: red"></h6>
+        <div class="alert alert-danger" th:if="${errorMessage != null}">
+            <span style="color : #ff0000" th:text="${errorMessage}"></span>
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
     </form>
 </div>

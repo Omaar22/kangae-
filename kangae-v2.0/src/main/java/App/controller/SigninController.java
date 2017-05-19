@@ -18,7 +18,7 @@ public class SigninController {
     @RequestMapping("/signin")
     public String signin(Model model) {
         if (!userService.isLoggedIn()) {
-            if(!model.containsAttribute("user"))
+            if (!model.containsAttribute("user"))
                 model.addAttribute("user", new User());
             return "/signin";
         } else {
@@ -29,7 +29,10 @@ public class SigninController {
     @RequestMapping(method = RequestMethod.POST, value = "/signin")
     public String signin(@ModelAttribute(value = "user") User user, Model model) {
         if (!userService.signin(user.getEmail(), user.getPassword())) {
-            model.addAttribute("errorMessage", "Wrong email or password!");
+            if (userService.getUser(user.getEmail()) == null)
+                model.addAttribute("errorMessage", "Account does not exist");
+            else
+                model.addAttribute("errorMessage", "The password is incorrect");
             return signin(model);
         } else {
             return "redirect:/";

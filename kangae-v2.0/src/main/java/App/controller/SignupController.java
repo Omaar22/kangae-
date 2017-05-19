@@ -35,7 +35,7 @@ public class SignupController {
         if (userService.signup(teacher)) {
             return "redirect:/";
         } else {
-            model.addAttribute("errorMessage", "Incorrect data!");
+            model.addAttribute("errorMessage", "An account with this email already exists");
             return signup(model);
         }
     }
@@ -45,7 +45,7 @@ public class SignupController {
         if (userService.signup(student)) {
             return "redirect:/";
         } else {
-            model.addAttribute("errorMessage", "Incorrect data!");
+            model.addAttribute("errorMessage", "An account with this email already exists");
             return signup(model);
         }
     }

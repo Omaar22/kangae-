@@ -18,7 +18,9 @@
         <input th:field="${game.instruction}" placeholder="Game Instructions" required="required" class="form-control"/>
         <input th:field="${game.question}" placeholder="Question" required="required" class="form-control"/>
         <input th:field="${game.answer}" placeholder="Answer" required="required" class="form-control"/>
-        <h6 th:text="${errorMessage}" style="color: red"></h6>
+        <div class="alert alert-danger" th:if="${errorMessage != null}">
+            <span style="color : #ff0000" th:text="${errorMessage}"></span>
+        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
     </form>
 </div>

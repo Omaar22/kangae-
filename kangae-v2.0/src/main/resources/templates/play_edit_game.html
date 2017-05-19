@@ -17,12 +17,12 @@
             Play game
         </button>
     </form>
-    <form th:action="@{'/course/' + ${game.course.name} + '/update/' + ${game.name}}">
+    <form th:if="${user.email == game.course.teacher.email}" th:action="@{'/course/' + ${game.course.name} + '/update/' + ${game.name}}">
         <button class="btn btn-lg btn-warning" type="submit" style="float: left; margin-left: 8px">
             Update game
         </button>
     </form>
-    <form th:action="@{'/course/' + ${game.course.name} + '/cancel/' + ${game.name}}">
+    <form th:if="${user.email == game.course.teacher.email}" th:action="@{'/course/' + ${game.course.name} + '/cancel/' + ${game.name}}">
         <button class="btn btn-lg btn-danger" type="submit" style="float: left; margin-left: 8px">Cancel game
         </button>
     </form>

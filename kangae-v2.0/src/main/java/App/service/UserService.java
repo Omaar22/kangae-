@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public boolean signin(String email, String password) {
-        User user = userBaseRepository.findByEmail(email);
+        User user = getUser(email);
         if (password != null && user != null && password.equals(user.getPassword())) {
             loggedInUser = user;
             return true;
@@ -45,4 +45,9 @@ public class UserService {
     public User getLoggedInUser() {
         return loggedInUser;
     }
+
+    public User getUser(String email) {
+        return userBaseRepository.findByEmail(email);
+    }
+
 }
