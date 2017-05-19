@@ -13,29 +13,31 @@
 
 <div>
     <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}">
-        <button class="btn btn-lg btn-success" type="submit" style="float: left; margin-left: 5px">
+        <button class="btn btn-lg btn-success" type="submit" style="float: left; margin-left: 8px">
             Play game
         </button>
     </form>
     <form th:action="@{'/course/' + ${game.course.name} + '/update/' + ${game.name}}">
-        <button class="btn btn-lg btn-warning" type="submit" style="float: left; margin-left: 5px">
+        <button class="btn btn-lg btn-warning" type="submit" style="float: left; margin-left: 8px">
             Update game
         </button>
     </form>
     <form th:action="@{'/course/' + ${game.course.name} + '/cancel/' + ${game.name}}">
-        <button class="btn btn-lg btn-danger" type="submit" style="margin-left: 5px">Cancel game
+        <button class="btn btn-lg btn-danger" type="submit" style="float: left; margin-left: 8px">Cancel game
         </button>
     </form>
+    <br style="clear:both"/>
 </div>
 
 <h2 class="container modal-header">Comments</h2>
-<div class="form" style="padding-top: 0%">
+<div class="form" style="padding-top: 0%;    background-color: #f8f8f8; border: solid 1px">
     <div th:each="comment : ${comments}">
-        <h3 th:text="${comment.user.name} + ': ' + ${comment.content}">Comment</h3>
+        <h4 th:text="${comment.user.name} + ': ' + ${comment.content}">Comment</h4>
     </div>
     <br/>
     <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name} + '/comment'}" method="post">
-        <input th:field="${newComment.content}" class="form-control" placeholder="Write Comment" th:required="required"/>
+        <input th:field="${newComment.content}" class="form-control" placeholder="Write Comment"
+               th:required="required"/>
         <button class="btn btn-lg btn-default btn-block" type="submit">Commet</button>
     </form>
 </div>
