@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Courses</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div th:replace="fragments/header-in::header"></div>
+
+<h1 class="modal-header container">Courses</h1>
+<div class="form">
+    <div th:each="course : ${courses}">
+        <form th:action="@{'/course/' + ${course.name}}">
+            <button th:text="${course.name} + ' created by: ' + ${course.teacher.name}"
+                    class="btn btn-lg btn-default btn-block" type="submit">Open
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${game.name}">Game Name</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div th:replace="fragments/header-in::header"></div>
+
+<h1 class="modal-header container">Play Game</h1>
+<div class="container">
+    <form th:action="@{'/course/' + ${game.course.name} + '/' + ${game.name}}" method="post" class="form">
+        <h2 th:text="${game.name}" class="form-heading">Game Name</h2>
+        <h4 th:text="${game.description}" class="form-heading">Game Description</h4>
+        <h4 th:text="${game.instruction}" class="form-heading">Game Instructions</h4>
+        <h4 th:text="${game.question}" class="form-heading">Game Question</h4>
+        <input th:field="${game.answer}" class="form-control" placeholder="Answer" required="required"/>
+        <button class="btn btn-lg btn-default btn-block" type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

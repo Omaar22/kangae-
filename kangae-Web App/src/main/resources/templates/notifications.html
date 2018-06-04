@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Dashboard</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div th:replace="fragments/header-in::header"></div>
+
+<h1 class="modal-header container">Notifications</h1>
+<div class="form">
+    <div th:each="notification : ${notifications}">
+        <form th:action="@{'/course/' + ${notification.comment.game.course.name} + '/' + ${notification.comment.game.name} + '/options'}"
+              method="get">
+            <button th:text="${notification.content} " class="btn btn-lg btn-default btn-block" type="submit">Content
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
